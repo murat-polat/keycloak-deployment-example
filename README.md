@@ -222,14 +222,13 @@ yourdomain.com {
 
 ### Keycloak Docker compose configuration
 
-```
-sudo nano docker-compose.yaml
-```
+``` sudo nano docker-compose.yaml ```
 
-```
 
 Copy paste YAML file below,  than save the file with "CTRL + X " and " Y "
 
+
+```
 ---
 
 version: '3'
@@ -282,6 +281,7 @@ services:
 volumes:
   postgres:
   keycloak:
+```
 
 ```
 

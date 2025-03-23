@@ -29,7 +29,7 @@ services:
       # KC_METRICS_ENABLED: true
       # KC_HEALTH_ENABLED: true
       # KC_HOSTNAME_STRICT: false
-      KC_HOSTNAME: mplt.pro # YorDomain name here!!!!
+      KC_HOSTNAME: yourdomain.com # YorDomain name here!!!!
       #KC_HOSTNAME_ADMIN_URL: https://localhost:8443
       #KC_HOSTNAME_URL: https://localhost:8080
       KEYCLOAK_ADMIN: admin
