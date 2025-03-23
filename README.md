@@ -3,7 +3,7 @@ Keycloack production deployment with secure SSL/HTTPS, and Caddy server
 
 
 
-### This  is a simple example  for deploying a Keycloak Docker application, to production environment.Application will be secure SSL/HTTPS via Caddy server.
+### This  is a simple example  for deploying a Keycloak Docker application, to production environment. With secure SSL/HTTPS via Caddy server.
 
 
 
@@ -17,7 +17,7 @@ Keycloack production deployment with secure SSL/HTTPS, and Caddy server
 - Caddy server and reverse proxy configuration for HTTPS/SSL
 
 ### Linux VM :
-You can order a Linux VM from the Digital Ocean, Contabo, Vultr, Linode, Mvps etc. For this tutorial, we choose an Ubuntu24.04  instance on [MVPS](https://www.mvps.net/).
+You can order a Linux VM from the Digital Ocean, Contabo, Vultr, Linode, MVPS etc. For this tutorial, we choose an Ubuntu24.04  instance on [MVPS](https://www.mvps.net/).
 After  first login as a root user, run:
 
 `sudo apt update`
@@ -32,7 +32,7 @@ Optional : If you want to change your root password:
 than change your root password
 
 We will run Keycloak inside a Docker container. To run Docker as a root user is not good choice.
-Therefore we need to create a new user, and give it admin privileges.
+Therefore we need to create a new user, and give this user admin privileges.
 
 `sudo adduser <newuser>`
 
@@ -134,11 +134,13 @@ Docker Compose version v2.34.0
 
 ### Domain configuration
 
-We need a domain name for publishing our application in World Wide Web. We choose a domainname from the https://www.namecheap.com. And we must tell the domain provider which server/IP provider will be used for publishing. Our Keycloak application will be served on MVPS. From  domain list => management => Nameservers => Custom DNS add three nameservers (ns1.mvps-hosted.com, ns2.mvps-hosted.com, ns3.mvps-hosted.com) and save.
+We need a domain name for publishing our application in World Wide Web. We choose a domainname from the https://www.namecheap.com. And must tell the domain provider which server/IP provider will be used for publishing. Our Keycloak application will be served on MVPS. From  domain list => management => Nameservers => Custom DNS add three nameservers (ns1.mvps-hosted.com, ns2.mvps-hosted.com, ns3.mvps-hosted.com) and save.
 
 ![](/src/doaminNamecheap.png)
 
-From MVPS "Nameservers(DNS)", add your domainname 
+
+From MVPS Control panel "Nameservers(DNS)", add your domainname.
+
 
 ![](/src/DNS_register_server_side.png)
 
@@ -259,7 +261,7 @@ services:
       # KC_METRICS_ENABLED: true
       # KC_HEALTH_ENABLED: true
       # KC_HOSTNAME_STRICT: false
-      KC_HOSTNAME: mplt.pro # YorDomain name here!!!!
+      KC_HOSTNAME: yourdomain.com # YorDomain name here!!!!
       #KC_HOSTNAME_ADMIN_URL: https://localhost:8443
       #KC_HOSTNAME_URL: https://localhost:8080
       KEYCLOAK_ADMIN: admin
@@ -294,10 +296,10 @@ Than visit YourDomain.com on browser "https://yourdomain.com"
 
 ![](/src/Keycloak_start.png)
 
-Click Administration Console then login with your credentiales from the docker-compose.yaml  file
+Click Administration Console then login with your credentials from the docker-compose.yaml  file
 (admin/Password123)
 
-After first login cnage your password
+After first login change your password
 
 ![](/src/ChangePassword.png)
 
