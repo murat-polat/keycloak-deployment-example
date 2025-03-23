@@ -64,11 +64,15 @@ sudo apt-get update
 ```
 ### To install the latest version, run:
 
-`sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin`
+```
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
 
 ### Give to the current user to run Docker and Docker-compose without "sudo" permissions
 
-`sudo usermod -aG docker $USER `
+```
+sudo usermod -aG docker $USER 
+```
 
 Than reboot your server 
 
@@ -130,11 +134,11 @@ Docker Compose version v2.34.0
 
 ### Domain configuration
 
-We need a domain name for publishing our application in World Wide Web. We choose a domainname from the https://www.namecheap.com. And we must tell the domain provider which server/IP provider will be used for publishing. Our Keycloak application will be served on MVPS. From  domain list => management => Nameservers => Custom DNS add three nameservers (ns1.mvps-hosted.com, ns1.mvps-hosted.com, ns1.mvps-hosted.com) and save.
+We need a domain name for publishing our application in World Wide Web. We choose a domainname from the https://www.namecheap.com. And we must tell the domain provider which server/IP provider will be used for publishing. Our Keycloak application will be served on MVPS. From  domain list => management => Nameservers => Custom DNS add three nameservers (ns1.mvps-hosted.com, ns2.mvps-hosted.com, ns3.mvps-hosted.com) and save.
 
 ![](/src/doaminNamecheap.png)
 
-From MVPS "DNS Zone Management", add your domainname to "Domain", and  "Target IP address" select your VM instance/IP from dropdown menu => then click "create zone".
+From MVPS "Nameservers(DNS)", add your domainname 
 
 ![](/src/DNS_register_server_side.png)
 
@@ -142,7 +146,6 @@ From MVPS "DNS Zone Management", add your domainname to "Domain", and  "Target I
 
 
 
-Now everything is working properly with HTTP on port 8000. But we need SSL/HTTPS,and configure Caddy server for reverse proxy.
 
 
 
