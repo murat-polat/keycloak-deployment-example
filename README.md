@@ -196,17 +196,9 @@ Mar 23 18:28:58 vps caddy[3071]: {"level":"info","ts":1742754538.7093666,"logger
 ```
 
 
-### Keycloak Docker compose configuration
-
-
-#### Coming soon ................
-
-
-
-
-
-
 #### Configuration reverse proxy with Caddyfile
+
+Keycloak will be served on port 8080 soon
 
 `sudo nano /etc/caddy/Caddyfile`
 
@@ -220,6 +212,106 @@ yourdomain.com {
 ```
 
 `sudo systemctl reload caddy`
+
+
+
+
+
+
+### Keycloak Docker compose configuration
+
+```
+sudo nano docker-compose.yaml
+```
+
+```
+
+Copy paste YAML file below,  than save the file with "CTRL + X " and " Y "
+
+---
+
+version: '3'
+
+### Postgress ###
+services:
+  postgres:
+    image: postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: Password123
+      restart: always
+
+### Keycloak ###
+  keycloak:
+    image: quay.io/keycloak/keycloak:23.0.3
+    command: start-dev  # --optimized
+    environment:
+      KC_DB: postgres
+      KC_DB_URL_HOST: postgres
+      KC_DB_URL: postgres
+      KC_DB_NAME: keycloak
+      KC_DB_USERNAME: admin
+      KC_DB_SCHEMA: public
+      KC_DB_PASSWORD: Password123
+      # KC_METRICS_ENABLED: true
+      # KC_HEALTH_ENABLED: true
+      # KC_HOSTNAME_STRICT: false
+      KC_HOSTNAME: mplt.pro # YorDomain name here!!!!
+      #KC_HOSTNAME_ADMIN_URL: https://localhost:8443
+      #KC_HOSTNAME_URL: https://localhost:8080
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: Password123
+      KC_PROXY: edge
+      #PROXY_HEADERS: xforwarded
+      #KC_HOSTNAME_STRICT: false
+      #KC_HOSTNAME_STRICT_BACKCHANNEL: false
+      # PROXY_ADDRESS_FORWARDING: true
+    ports:
+      - "8080:8080"
+   
+    depends_on:
+      - postgres
+    restart: always
+
+
+volumes:
+  postgres:
+  keycloak:
+
+```
+
+Now time to start Keycloak
+
+
+```
+docker compose up -d 
+```
+
+Than visit YourDomain.com on browser "https://yourdomain.com"
+
+![](/src/Keycloak_start.png)
+
+Click Administration Console then login with your credentiales from the docker-compose.yaml  file
+(admin/Password123)
+
+After first login cnage your password
+
+![](/src/ChangePassword.png)
+
+
+Done :)
+
+
+
+
+
+
+
+
+
 
 
 
